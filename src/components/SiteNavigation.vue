@@ -1,6 +1,6 @@
 <template>
-   <header class="sticky top-0 shadow-lg">
-    <nav class="container flex flex-col items-center gap-4 text-slate-800 py-6">
+   <header class="sticky top-0 shadow-xl">
+    <nav class="container flex flex-col items-center gap-4 text-black py-6">
 
     <div class="flex items-center gap-3 flex-1">
       <i class="fa fa-cutlery text-2xl" aria-hidden="true"></i>
