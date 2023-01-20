@@ -8,22 +8,18 @@
           <div flex items-center gap-3 flex-1 >
           <h1 class="text-2xl text-gray-500 mb-1 flex items-center gap-3 flex-1">Register</h1>
         </div>
-        <form action="">
+        <form @submit.prevent="handleSubmit">
         <div class="container">
-            <label class="text-gray-700"><b>Username</b></label>
-            <input class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="text" placeholder="Enter Username" name="uname" required>
-            
             <label class="text-gray-700"><b>Email</b></label>
-            <input class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="email" placeholder="Enter Username" name="uname" required>
+            <input v-model = "email" class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="email" placeholder="Enter Email" name="uname" required>
             
             
             <label class="text-gray-700"><b>Password</b></label>
-            <input class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="password" placeholder="Enter Password" name="psw" required>
+            <input v-model = "password" class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="password" placeholder="Enter Password" name="psw" required>
             
-            <label class="text-gray-700"><b>Confirm Password</b></label>
-            <input class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="password" placeholder="Enter Confirmed Password" name="psw" required>
-          
-            <button class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors" type="submit">Register</button>
+            <button @click="Register" class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors">Register</button>
+
+            <label class="text-gray-700"><b>{{email.value}}</b></label>
         </div>
         </form>
         </div>
@@ -33,6 +29,9 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+ 
 defineEmits(['Signup--close-modal']);
 defineProps ({
     SignupmodalActive: {
@@ -40,6 +39,22 @@ defineProps ({
         default : false,
     },
 });
+
+const password = ref("");
+const email = ref("");
+const auth = getAuth();
+
+const Register = () => {
+ createUserWithEmailAndPassword(auth,email.value, password.value)
+ .then((data) => {
+  console.log("Successfully Registered!")
+ })
+ .catch((error) => {
+  console.log(error.code);
+  alert(error.message);
+ })
+};
+
 
 </script>
 <style scoped> 
