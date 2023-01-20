@@ -12,7 +12,7 @@
       </div>
       <div class=" flex gap-4">
          <i class="fa fa-sign-in text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="LoginSignuptogglemodal"></i>
-         <i class="fa fa-sign-out text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true"></i>
+         <i class="fa fa-sign-out text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="logout"></i>
       </div>
     </div>
 
@@ -48,6 +48,15 @@ import { ref } from 'vue';
 import BaseModal from './BaseModal.vue';
 import LoginSignupVue from './Login-Signup.vue';
 import Register from './Register.vue';
+
+const logout = () => {
+    firebase
+    .auth()
+    .signout()
+    .then(() => console.log("Signed out"))
+    .catch(err => alert(err.message));
+}
+
 
 const modalActive = ref(null);
 const togglemodal = () => {
