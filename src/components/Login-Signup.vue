@@ -8,20 +8,19 @@
           <div flex items-center gap-3 flex-1 >
           <h1 class="text-2xl text-gray-500 mb-1 flex items-center gap-3 flex-1">Login</h1>
         </div>
-        <form action="">
         <div class="container">
-          <label class="text-gray-700"><b>Username</b></label>
-          <input class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="text" placeholder="Enter Username" name="uname" required>
+          <label class="text-gray-700"><b>Email</b></label>
+          <input v-model = "email" class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="text" placeholder="Enter Email" name="uname" required>
 
           <label class="text-gray-700"><b>Password</b></label>
-          <input class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="password" placeholder="Enter Password" name="psw" required>
+          <input v-model = "password" class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="password" placeholder="Enter Password" name="psw" required>
 
           <input id="remember" class="mb-4 text-black" type="checkbox" checked="checked" name="rememberbox">
           <label class="text-black" for="remember">Remember me
           </label>
-          <button class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors" type="submit">Login</button>
+          <p v-if = "errMSG"> {{ errMSG }}</p>
+          <button @click="loginEP" class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors">Login</button>
         </div>
-        </form>
         </div>
         </Transition>
     </div>
@@ -29,6 +28,8 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 defineEmits(['Login-Signup--close-modal']);
 defineProps ({
     LoginSignupmodalActive: {
@@ -36,6 +37,38 @@ defineProps ({
         default : false,
     },
 });
+
+
+const password = ref("");
+const email = ref("");
+const auth = getAuth();
+const errMSG = ref();
+
+const loginEP = () => {
+  signInWithEmailAndPassword(auth,email.value, password.value)
+ .then((data) => {
+  console.log("Successfully Logged in!")
+  console.log(auth.currentUser);
+  
+ })
+ .catch((error) => {
+  console.log(error.code);
+  switch (error.code) {
+    case "auth/invalid-email":
+      errMSG.value = "Invalid Email";
+      break;
+    case "auth/user-not-found":
+      errMSG.value = "No account with that email was found";
+      break;
+    case "auth/wrong-password":
+      errMSG.value = "Incorrect Password";
+      break;
+    default:
+      errMSG.value = "";
+      break;
+  }
+ })
+};
 
 </script>
 <style scoped> 

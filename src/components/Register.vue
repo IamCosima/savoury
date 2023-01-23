@@ -8,7 +8,6 @@
           <div flex items-center gap-3 flex-1 >
           <h1 class="text-2xl text-gray-500 mb-1 flex items-center gap-3 flex-1">Register</h1>
         </div>
-        <form @submit.prevent="handleSubmit">
         <div class="container">
             <label class="text-gray-700"><b>Email</b></label>
             <input v-model = "email" class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="email" placeholder="Enter Email" name="uname" required>
@@ -21,7 +20,6 @@
 
             <label class="text-gray-700"><b>{{email.value}}</b></label>
         </div>
-        </form>
         </div>
         </Transition>
     </div>
@@ -48,6 +46,7 @@ const Register = () => {
  createUserWithEmailAndPassword(auth,email.value, password.value)
  .then((data) => {
   console.log("Successfully Registered!")
+  console.log(auth.currentUser)
  })
  .catch((error) => {
   console.log(error.code);

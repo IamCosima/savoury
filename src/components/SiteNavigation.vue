@@ -1,6 +1,6 @@
 <template>
    <header class="sticky top-0 shadow-xl">
-    <nav class="container flex flex-col items-center gap-4 text-black py-6">
+    <nav class="container flex flex-col items-center gap-4 text-gray-900 py-6">
 
     <div class="flex items-center gap-3 flex-1">
       <i class="fa fa-cutlery text-2xl" aria-hidden="true"></i>
@@ -12,8 +12,8 @@
       </div>
       <div class=" flex gap-4">
          <i class="fa fa-sign-in text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="LoginSignuptogglemodal"></i>
-         <i class="fa fa-sign-out text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="logout"></i>
-      </div>
+         <i v-if = "isloggedIn" class="fa fa-sign-out text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="logout"></i>
+        </div>
     </div>
 
     <BaseModal :modal-active="modalActive" @close-modal="togglemodal">
@@ -44,18 +44,31 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import BaseModal from './BaseModal.vue';
 import LoginSignupVue from './Login-Signup.vue';
 import Register from './Register.vue';
+import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
+
+const isloggedIn = ref(false)
+let auth;
+
+onMounted(() => {
+  auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+  if (user) {
+    isloggedIn.value =true;
+  } else {
+    isloggedIn.value =false;
+  }  
+  });
+});
 
 const logout = () => {
-    firebase
-    .auth()
-    .signout()
-    .then(() => console.log("Signed out"))
-    .catch(err => alert(err.message));
-}
+  signOut(auth).then(() => {
+    console.log("Succsessfully Logout")
+  });
+};
 
 
 const modalActive = ref(null);
