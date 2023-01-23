@@ -1,5 +1,6 @@
 <template>
-    <Transition name="Login-Signup-modal-outer">  
+    <Transition name="Login-Signup-modal-outer"> 
+      <div v-show ="show">
     <div  v-show ="LoginSignupmodalActive"  
     class="absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0 flex justify-center px-8 rounded">
     <Transition name="Login-Signup-modal-inner">
@@ -24,6 +25,7 @@
         </div>
         </Transition>
     </div>
+  </div> 
      </Transition> 
 </template>
 
@@ -38,7 +40,7 @@ defineProps ({
     },
 });
 
-
+const show = ref(true)
 const password = ref("");
 const email = ref("");
 const auth = getAuth();
@@ -49,6 +51,7 @@ const loginEP = () => {
  .then((data) => {
   console.log("Successfully Logged in!")
   console.log(auth.currentUser);
+  show.value = !show.value
   
  })
  .catch((error) => {

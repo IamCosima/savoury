@@ -11,7 +11,7 @@
          <i class="fa fa-info text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="togglemodal" ></i>
       </div>
       <div class=" flex gap-4">
-         <i class="fa fa-sign-in text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="LoginSignuptogglemodal"></i>
+         <i v-if = "!isloggedIn" class="fa fa-sign-in text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="LoginSignuptogglemodal"></i>
          <i v-if = "isloggedIn" class="fa fa-sign-out text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="logout"></i>
         </div>
     </div>
