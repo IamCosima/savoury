@@ -16,9 +16,3 @@
 import SiteNavigation from './components/SiteNavigation.vue';
 import plattercalc from './components/plattercalc.vue';
 </script>
-
-
-
-<style lang="scss" scoped>
-
-</style>

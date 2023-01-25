@@ -1,11 +1,6 @@
-
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
-
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase } from "firebase/database";
+import { getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -14,16 +9,10 @@ const firebaseConfig = {
   projectId: "savoury-calculator",
   storageBucket: "savoury-calculator.appspot.com",
   messagingSenderId: "712812728200",
-  appId: "1:712812728200:web:b1f32550bf1f4af3c7b43d",
-  databaseURL : "https://savoury-calculator-default-rtdb.firebaseio.com/",
-
+  appId: "1:712812728200:web:b1f32550bf1f4af3c7b43d"
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const auth = getAuth(app);
-
-const database = getDatabase(app);
-
-export {database}
-createApp(App).mount('#app')
