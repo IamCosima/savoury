@@ -17,3 +17,7 @@ npm run dev
   [accordian for the platter calcultor](https://medium.com/notonlycss/how-to-build-an-accordion-component-in-vue-js-570ee594404c)
 
   [Saving and reading data from firebase realtime database](//https://betterprogramming.pub/vue-js-firebase-how-to-develop-a-app-without-writing-backend-11f9de6f76bc)
+
+### test data
+Test email fluffy@gmail.com
+Test password 123456 
