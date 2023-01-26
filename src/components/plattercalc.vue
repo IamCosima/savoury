@@ -320,7 +320,7 @@ else if (this.selected === 'Empty') {
 }
 }
 },
-
+//https://betterprogramming.pub/vue-js-firebase-how-to-develop-a-app-without-writing-backend-11f9de6f76bc
 
   }
 
