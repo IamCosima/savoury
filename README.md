@@ -98,7 +98,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 * [accordian for the platter calcultor](https://medium.com/notonlycss/how-to-build-an-accordion-component-in-vue-js-570ee594404c)
 * [Saving and reading data from firebase realtime database](//https://betterprogramming.pub/vue-js-firebase-how-to-develop-a-app-without-writing-backend-    11f9de6f76bc)
-* [Readme Template]: https://github.com/othneildrew/Best-README-Template
+* [Readme Template]: (https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
