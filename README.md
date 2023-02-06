@@ -34,12 +34,8 @@
 ### Built With
 
 * [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
-
+* [![Firebase][Firebase.g]][Firebase-url]
+* [![Tailwind][Tailwind CSS]][Tailwind-url]
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -72,7 +68,7 @@ This is an example of how to list things you need to use the software and how to
 4. Install Firebase
    ```
    npm install firebase
-  
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -97,9 +93,15 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Acknowledgments
 
 * [accordian for the platter calcultor](https://medium.com/notonlycss/how-to-build-an-accordion-component-in-vue-js-570ee594404c)
-* [Saving and reading data from firebase realtime database](//https://betterprogramming.pub/vue-js-firebase-how-to-develop-a-app-without-writing-backend-    11f9de6f76bc)
-* [Readme Template]: (https://github.com/othneildrew/Best-README-Template)
-
+* [Saving and reading data RealtimeDB](https://betterprogramming.pub/vue-js-firebase-how-to-develop-a-app-without-writing-backend-11f9de6f76bc)
+* [Readme Template](https://github.com/othneildrew/Best-README-Template)
+* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
+* [Malven's Grid Cheatsheet](https://grid.malven.co/)
+* [Img Shields](https://shields.io)
+* [Font Awesome](https://fontawesome.com)
+* [React Icons](https://react-icons.github.io/react-icons/search)
+* [Shields with icons](https://github.com/progfay/shields-with-icon)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -125,13 +127,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 [React-url]: https://reactjs.org/
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
 [Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
+[Firebase.g]: https://img.shields.io/static/v1?style=for-the-badge&message=Firebase&color=222222&logo=Firebase&logoColor=FFCA28&label=
+[Firebase-url]: https://firebase.google.com/
+[Tailwind CSS]: https://img.shields.io/static/v1?style=for-the-badge&message=Tailwind+CSS&color=222222&logo=Tailwind+CSS&logoColor=06B6D4&label=
+[Tailwind-url]: https://tailwindcss.com/
