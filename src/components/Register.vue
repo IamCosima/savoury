@@ -16,7 +16,8 @@
             
             <label class="text-gray-700"><b>Password</b></label>
             <input v-model = "password" class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="password" placeholder="Enter Password" name="psw" required>
-            
+            <label class="text-red-700" for="remember">Please Make your password at lease 6 characters long
+          </label>
             <button @click="Register" class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors">Register</button>
 
             <label class="text-gray-700"><b>{{email.value}}</b></label>

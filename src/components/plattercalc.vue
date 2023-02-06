@@ -118,7 +118,7 @@
     </div>
     <div class="w-full md:w-1/2 px-3">
       <label class="block uppercase tracking-wide text-red-700 text-2xl font-bold mb-2" for="">
-        Total: {{ Calculateprice() }}
+        Total:R{{ Calculateprice() }}
       </label>
       <label class="block uppercase tracking-wide text-red-700 text-2xl font-bold mb-2" for="">
         Pcs: {{ CalculateNumPcs() }}
