@@ -25,11 +25,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
+This is a savory calculator that allows you to create a platter of the most common savory platter items. You can create your own platter with Samosas, Pies, Springrolls, Half moons and lastly mini pizzas. These savories are the most common savories used in platters in South Africa for events. You also have the option of saving your platter for futre use.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Built With
 
@@ -42,33 +40,27 @@
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
   npm install npm@latest -g
   ```
+* Install Firebase
+   ```sh
+   npm install firebase
+   ```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Install Firebase
-   ```
-   npm install firebase
-   ```
+1. Download the Github Repository as a Zip
+2. Unzip the codebase
+3. Please install the prerequisites as per the instructions above
+4. To run the web app
+  ```sh
+  npm run dev
+  ```
+5. There will be a link for the localhost please click it and now you should see the web app in a tab in your default browser
+   
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
