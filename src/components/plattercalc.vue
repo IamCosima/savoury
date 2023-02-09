@@ -14,17 +14,30 @@
         Platter Type(Optional)
       </label>
       <select @change="setPlatter()"  v-model="selected" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="" id="">
-        <option value="Empty">No Platter</option>
-        <option value="S">Small Standard Platter(10pcs)</option>
-        <option value="M">Medium Standard Platter(25pcs)</option>
-        <option value="L">Standard Platter(50pcs)</option>
-        <option value="XL">large Platter(100pcs)</option>
-        <option v-for="user in users" v-bind:key="user.id" value="">{{ user.plattername }}</option>
+        <optgroup label="Default Platters:">
+          <option value="Empty">No Platter</option>
+          <option value="S">Small Standard Platter(10pcs)</option>
+          <option value="M">Medium Standard Platter(25pcs)</option>
+          <option value="L">Standard Platter(50pcs)</option>
+          <option value="XL">large Platter(100pcs)</option>
+        </optgroup>
+        <optgroup label="User Created Platters:">
+          <option v-for="user in users" v-bind:key="user.id" :value="user.plattername"  >{{ user.plattername }}</option>
+        </optgroup>
+        
         </select>
     </div>
   </div>
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
+        Enter Number of Guests:
+      </label>
+      <input v-model = "noguests" min="1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number">
+    </div>
+  </div>
   <div class="">
-      <button class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors" @click="click_get ">Load Saved platters</button>
+      <button v-if = isloggedIn  class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors" @click="click_get ">Load Saved platters</button>
     </div>
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full px-3">
@@ -111,10 +124,10 @@
 
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
+      <label v-if = isloggedIn  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
         Enter New Platter Name:
       </label>
-      <input v-model = "PlatterText" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text">
+      <input v-if = isloggedIn  v-model = "PlatterText" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text">
     </div>
     <div class="w-full md:w-1/2 px-3">
       <label class="block uppercase tracking-wide text-red-700 text-2xl font-bold mb-2" for="">
@@ -123,11 +136,14 @@
       <label class="block uppercase tracking-wide text-red-700 text-2xl font-bold mb-2" for="">
         Pcs: {{ CalculateNumPcs() }}
       </label>
+      <label class="block uppercase tracking-wide text-red-700 text-2xl font-bold mb-2" for="">
+        Per Person: {{ calculateperperson() }}
+      </label>
     </div>
   </div>
     <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-      <button class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors" type="submit" @click="click_post">Save</button>
+      <button v-if = isloggedIn  class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors" type="submit" @click="click_post">Save</button>
     </div>
   </div>
   </div>
@@ -141,30 +157,22 @@
 
 <script setup>
 import collapsible from './collapsible.vue';
-import { ref } from 'vue';
-function writeSavePlatterData() {
-  fetch('https://savoury-calculator-default-rtdb.firebaseio.com/test.json', {
-        method: 'POST',
-        headers : {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-    plattername: this.PlatterText,
-    Samosa_Ammont:  this.Samosa_num,
-    Pies_Ammont: this.Pies_num,
-    Springrolls_Ammont: this.Springrolls_num,
-    HalfMoons_Ammont: this.HalfMoons_num,
-    MiniPizza_Ammont: this.MiniPizza_num,
-    Samosa_Prices: this.Samosa_price,
-    Pies_Prices: this.Pies_price,
-    Springrolls_Prices: this.Springrolls_price,
-    HalfMoons_Prices: this.HalfMoons_price,
-    MiniPizza_Prices: this.MiniPizza_price,
-        })
-      });
-  console.log("Platter has been saved for futre use")
-  alert("Platter has been saved for futre use")
-}
+import { onMounted, onUnmounted,ref } from 'vue';
+import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
+
+const isloggedIn = ref(false)
+let auth;
+//Allow for the user to authenticate that they have logged in 
+onMounted(() => {
+  auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+  if (user) {
+    isloggedIn.value =true;
+  } else {
+    isloggedIn.value =false;
+  }  
+  });
+});
 </script>
 
 <script>
@@ -182,7 +190,8 @@ export default {
     HalfMoons_price : 0,
     MiniPizza_price : 0,
     PlatterText :'',
-    users: []
+    users: [],
+    noguests : 0
     }
   },
   methods: {
@@ -244,6 +253,9 @@ export default {
 CalculateNumPcs() {
       return this.Samosa_num  + this.Pies_num  + this.Springrolls_num + this.HalfMoons_num + this.MiniPizza_num;
       
+},
+calculateperperson(){
+  return Math.round(this.CalculateNumPcs() /3 / this.noguests)
 },
 setPlatter() {
     if (this.selected == "S") {
@@ -307,16 +319,20 @@ else if (this.selected === 'Empty') {
     this.MiniPizza_price = ref(0)
 } else {
   for (const id in this.users) {
-      this.Samosa_price = this.users[id]['Samosa_Prices'],
-      this.Pies_price = this.users[id]['Pies_Prices']
-      this.Springrolls_price = this.users[id]['Springrolls_Prices']
-      this.HalfMoons_price = this.users[id]['HalfMoons_Prices']
-      this.MiniPizza_price = this.users[id]['MiniPizza_Prices']
-      this.Samosa_num = this.users[id]['Samosa_Ammont']
-      this.Pies_num = this.users[id]['Pies_Ammont']
-      this.Springrolls_num = this.users[id]['Springrolls_Ammont']
-      this.HalfMoons_num = this.users[id]['HalfMoons_Prices']
-      this.MiniPizza_num = this.users[id]['MiniPizza_Prices']
+    //console.log(this.users[id]['plattername'])
+    //console.log(this.selected)
+      if (this.selected === this.users[id]['plattername']) {
+        this.Samosa_price = this.users[id]['Samosa_Prices'],
+        this.Pies_price = this.users[id]['Pies_Prices']
+        this.Springrolls_price = this.users[id]['Springrolls_Prices']
+        this.HalfMoons_price = this.users[id]['HalfMoons_Prices']
+        this.MiniPizza_price = this.users[id]['MiniPizza_Prices']
+        this.Samosa_num = this.users[id]['Samosa_Ammont']
+        this.Pies_num = this.users[id]['Pies_Ammont']
+        this.Springrolls_num = this.users[id]['Springrolls_Ammont']
+        this.HalfMoons_num = this.users[id]['HalfMoons_Prices']
+        this.MiniPizza_num = this.users[id]['MiniPizza_Prices'] 
+      }
 }
 }
 },
