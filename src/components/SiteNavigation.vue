@@ -15,7 +15,6 @@
          <i v-if = "isloggedIn" class="fa fa-sign-out text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="logout"></i>
         </div>
     </div>
-
     <BaseModal :modal-active="modalActive" @close-modal="togglemodal">
       <div class="text-black">
           <h1 class="text-2xl mb-1">About:</h1>
@@ -25,13 +24,12 @@
           <h2 class="text-2xl">How it works:</h2>
           <ol class="list-decimal list-inside mb-4">
             <li>
-             Please Type in the values in the text boxes acordingly
+             Please Type in the values in the input boxes acordingly.
+             You can also load platters by pressing the load saved platter button and select the platers from the drop down menu.
+             You can also see the total cost and how many pieces your platter is made of by looking at the bottom right of the platter calculator
             </li>
             <li>
-              Select the number of guests
-            </li>
-            <li>
-              To save this result press the + sign
+              To save this result press the save button and input a name for your platter.
             </li>
           </ol>
         </div>
@@ -52,7 +50,7 @@ import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
 
 const isloggedIn = ref(false)
 let auth;
-
+//Allow for the user to authenticate that they have logged in 
 onMounted(() => {
   auth = getAuth();
   onAuthStateChanged(auth, (user) => {
@@ -63,24 +61,24 @@ onMounted(() => {
   }  
   });
 });
-
+//Allow for the user to logout
 const logout = () => {
   signOut(auth).then(() => {
     console.log("Succsessfully Logout")
   });
 };
 
-
+//This function allows for the information modal to close
 const modalActive = ref(null);
 const togglemodal = () => {
    modalActive.value = !modalActive.value;
 }
-
+//This function allows for the register modal to close
 const SignupmodalActive = ref(null);
 const Signuptogglemodal = () => {
   SignupmodalActive.value = !SignupmodalActive.value;
 }
-
+//This function allows for the login modal to close
 const LoginSignupmodalActive = ref(null);
 const LoginSignuptogglemodal = () => {
   LoginSignupmodalActive.value = !LoginSignupmodalActive.value;
