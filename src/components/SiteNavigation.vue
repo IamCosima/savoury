@@ -1,5 +1,6 @@
 <template>
    <header class="sticky top-0 shadow-xl">
+    <!-- The nav holds all the buttons for the register, login and logout for the program as well as a guide on how to use the program -->
     <nav class="container flex flex-col items-center gap-4 text-gray-900 py-6">
 
     <div class="flex items-center gap-3 flex-1">
@@ -11,10 +12,12 @@
          <i class="fa fa-info text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="togglemodal" ></i>
       </div>
       <div class=" flex gap-4">
+        <!-- This changes the icon depending if the user is signed in it will show logout if the user is logged out it will show login -->
          <i v-if = "!isloggedIn" class="fa fa-sign-in text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="LoginSignuptogglemodal"></i>
          <i v-if = "isloggedIn" class="fa fa-sign-out text-2xl hover:text-white duration-150 cursor-pointer" aria-hidden="true" @click="logout"></i>
         </div>
     </div>
+    <!-- This uses the basemodal component in order and then shows text that is slotted in and can be changed for how to use the program -->
     <BaseModal :modal-active="modalActive" @close-modal="togglemodal">
       <div class="text-black">
           <h1 class="text-2xl mb-1">About:</h1>
@@ -29,12 +32,12 @@
              You can also see the total cost and how many pieces your platter is made of by looking at the bottom right of the platter calculator
             </li>
             <li>
-              To save this result press the save button and input a name for your platter.
+              To save this result press the save button and input a name for your platter. Please make sure you are logged in as you have limited functionality otherwise
             </li>
           </ol>
         </div>
    </BaseModal>
-
+   <!-- This allows for you to open and close the register and login dialogs  -->
    <LoginSignupVue :LoginSignupmodalActive="LoginSignupmodalActive" @Login-Signup--close-modal="LoginSignuptogglemodal" ></LoginSignupVue>
     <Register :SignupmodalActive="SignupmodalActive" @Signup--close-modal="Signuptogglemodal"></Register>
   </nav>

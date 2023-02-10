@@ -1,4 +1,5 @@
 <template>
+   <!-- This allows me to create a smooth transition for when the modal is opened and closded  -->
     <Transition name="Signup-modal-outer"> 
       <div v-show ="show">
     <div  v-show ="SignupmodalActive"
@@ -9,6 +10,7 @@
           <div flex items-center gap-3 flex-1 >
           <h1 class="text-2xl text-gray-500 mb-1 flex items-center gap-3 flex-1">Register</h1>
         </div>
+        <!-- container for all the inputs-->
         <div class="container">
             <label class="text-gray-700"><b>Email</b></label>
             <input v-model = "email" class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="email" placeholder="Enter Email" name="uname" required>

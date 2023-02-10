@@ -1,4 +1,5 @@
 <template>
+  <!-- This uses the collapsible component so that it can be used else where in the program if need be -->
 <collapsible>
     <template v-slot:title>
     <span class="font-semibold text-xl">Platter Calculator</span>
@@ -6,6 +7,7 @@
   <template v-slot:content>
     <div>
       <div>
+        <!-- form is used to hande the inputs of the calculator -->
         <form @submit.prevent="handleSubmit" class="w-full max-w-xl rounded px-3
          bg-orange-600">
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -14,6 +16,7 @@
         Platter Type(Optional)
       </label>
       <select @change="setPlatter()"  v-model="selected" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="" id="">
+        <!-- This is where the built in platters are stored for anyone that is not logged in can use-->
         <optgroup label="Default Platters:">
           <option value="Empty">No Platter</option>
           <option value="S">Small Standard Platter(10pcs)</option>
@@ -21,7 +24,8 @@
           <option value="L">Standard Platter(50pcs)</option>
           <option value="XL">large Platter(100pcs)</option>
         </optgroup>
-        <optgroup label="User Created Platters:">
+        <!-- this is where the user created platters will be taken from the database if the user clicks the load saved platters button not visable if not logged in-->
+        <optgroup v-if = isloggedIn  label="User Created Platters:">
           <option v-for="user in users" v-bind:key="user.id" :value="user.plattername"  >{{ user.plattername }}</option>
         </optgroup>
         
@@ -30,13 +34,15 @@
   </div>
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <!-- This is where the user can choose the number of guests-->
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
         Enter Number of Guests:
       </label>
-      <input v-model = "noguests" min="1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number">
+      <input v-model = "noguests" min="0" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number">
     </div>
   </div>
   <div class="">
+    <!-- This is where the user can load saved platters if they are logged in otherwise this is not visable-->
       <button v-if = isloggedIn  class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors" @click="click_get ">Load Saved platters</button>
     </div>
   <div class="flex flex-wrap -mx-3 mb-6">
@@ -44,7 +50,7 @@
       <label class="block uppercase tracking-wide text-gray-700 text-base font-bold mb-2" for="">
         Composition
       </label>
-
+       <!-- This is where the user can choose the number and price of Samosas-->
       <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
@@ -59,7 +65,7 @@
       <input v-model = "Samosa_price" id="Samosa_price" name="Samosa_price" min="0" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number">
     </div>
   </div>
-
+  <!-- This is where the user can choose the number and price of Pies-->
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
@@ -74,7 +80,7 @@
       <input v-model = "Pies_price" min="0" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number">
     </div>
   </div>
-
+<!-- This is where the user can choose the number and price of Springrolls-->
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
@@ -90,7 +96,7 @@
     </div>
   </div>
 
-
+<!-- This is where the user can choose the number and price of Half Moons-->
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
@@ -106,7 +112,7 @@
     </div>
   </div>
 
-
+<!-- This is where the user can choose the number and price of Mini Pizza-->
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
@@ -124,6 +130,7 @@
 
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <!-- This is where the user can save platters if they are logged in otherwise this is not visable-->
       <label v-if = isloggedIn  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
         Enter New Platter Name:
       </label>
@@ -131,18 +138,22 @@
     </div>
     <div class="w-full md:w-1/2 px-3">
       <label class="block uppercase tracking-wide text-red-700 text-2xl font-bold mb-2" for="">
+        <!-- This is where the user can see the total cost of the platter in Rands(ZAR)-->
         Total:R{{ Calculateprice() }}
       </label>
       <label class="block uppercase tracking-wide text-red-700 text-2xl font-bold mb-2" for="">
+         <!-- This is where the user can see the total number of pieces of the platter-->
         Pcs: {{ CalculateNumPcs() }}
       </label>
       <label class="block uppercase tracking-wide text-red-700 text-2xl font-bold mb-2" for="">
+         <!-- This is where the user can see the number of savories per a person can have in that platter-->
         Per Person: {{ calculateperperson() }}
       </label>
     </div>
   </div>
     <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <!-- This is where the user can save platters by pressing the button if they are logged in otherwise this is not visable-->
       <button v-if = isloggedIn  class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors" type="submit" @click="click_post">Save</button>
     </div>
   </div>
@@ -195,6 +206,7 @@ export default {
     }
   },
   methods: {
+    //This allows for the platter data to be saved in the database
     click_post() {
       fetch('https://savoury-calculator-default-rtdb.firebaseio.com/test.json', {
         method: 'POST',
@@ -218,6 +230,7 @@ export default {
       console.log("Platter has been saved for futre use")
       alert("Platter has been saved for futre use")
     },
+    //This allows for the platter data to be retrived from database and saved in a local array 
     click_get() {
       fetch('https://savoury-calculator-default-rtdb.firebaseio.com/test.json').then((response) => {
         if (response.ok){
@@ -245,18 +258,22 @@ export default {
         this.users = results;
       });
     },
+    //Used to calculate the total price of the plater
     Calculateprice() {
       return this.Samosa_num * this.Samosa_price + this.Pies_num * this.Pies_price + this.Springrolls_num * this.Springrolls_price + this.HalfMoons_num 
       * this.HalfMoons_price + this.MiniPizza_num * this.MiniPizza_price;
       
 },
+//Used to calculate the total number of pieces of the plater
 CalculateNumPcs() {
       return this.Samosa_num  + this.Pies_num  + this.Springrolls_num + this.HalfMoons_num + this.MiniPizza_num;
       
 },
+//Used to calculate the savories per a person can have in that platter
 calculateperperson(){
   return Math.round(this.CalculateNumPcs() /3 / this.noguests)
 },
+// Used to set the values in the input boxes depending on which option is selected in the drop down box
 setPlatter() {
     if (this.selected == "S") {
     this.Samosa_num = ref(2)
@@ -318,6 +335,7 @@ else if (this.selected === 'Empty') {
     this.HalfMoons_price = ref(0)
     this.MiniPizza_price = ref(0)
 } else {
+  // Used to set the values in the input boxes depending on which option is selected in the drop down box for the user created platters which uses the plattername to see if any of the records match
   for (const id in this.users) {
     //console.log(this.users[id]['plattername'])
     //console.log(this.selected)

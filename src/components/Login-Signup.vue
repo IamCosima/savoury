@@ -1,4 +1,5 @@
 <template>
+  <!-- This allows me to create a smooth transition for when the modal is opened and closded  -->
     <Transition name="Login-Signup-modal-outer"> 
       <div v-show ="show">
     <div  v-show ="LoginSignupmodalActive"  
@@ -9,12 +10,15 @@
           <div flex items-center gap-3 flex-1 >
           <h1 class="text-2xl text-gray-500 mb-1 flex items-center gap-3 flex-1">Login</h1>
         </div>
+         <!-- container for all the inputs-->
         <div class="container">
           <label class="text-gray-700"><b>Email</b></label>
           <input v-model = "email" class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="text" placeholder="Enter Email" name="uname" required>
 
           <label class="text-gray-700"><b>Password</b></label>
+          
           <input v-model = "password" class="w-full py-2 bg-gray-300 text-gray-500 px-1 outline-none mb-4" type="password" placeholder="Enter Password" name="psw" required>
+          <!-- If there is an error message this will appear dynamically-->
           <p v-if = "errMSG"> {{ errMSG }}</p>
           <button @click="loginEP" class="bg-blue-500 w-full text-gray-100 py-2 rounded hover:bg-blue-600 transition-colors">Login</button>
         </div>
@@ -42,15 +46,15 @@ const email = ref("");
 const auth = getAuth();
 const errMSG = ref();
 
+//login authentication to make sure the values from the inputs match a record in the Databse 
 const loginEP = () => {
   signInWithEmailAndPassword(auth,email.value, password.value)
  .then((data) => {
   console.log("Successfully Logged in!")
   console.log(auth.currentUser);
   show.value = !show.value
-  
- })
- .catch((error) => {
+  // This is to allow for the error codes to show 
+ }).catch((error) => {
   console.log(error.code);
   switch (error.code) {
     case "auth/invalid-email":
