@@ -69,13 +69,23 @@ This is a savory calculator that allows you to create a platter of the most comm
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
 
 ### test data
 Test email fluffy@gmail.com
 Test password 123456 
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+These test data is for the user to login and be able to save and use other user created platters.
+
+If you would like to make your own login you can by going to the person with a + icon and entering the required details and you will be automatically logged in.
+
+Do not that if you log out there is a bug where you might not be able to log back in again so to fix this please reload the page sorry for the inconvenicence.
+
+Using any of the default platters should yield results that are quite easy to verify.
+
+When using the calculator please make sure to populate the number of guests input as if you leave it out the per person calculation will be inacurate.
+
+If you dont want a particular savory please just make the price and the number of savories set to zero.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
