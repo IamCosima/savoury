@@ -104,6 +104,7 @@ If you dont want a particular savory please just make the price and the number o
 * [Font Awesome](https://fontawesome.com)
 * [React Icons](https://react-icons.github.io/react-icons/search)
 * [Shields with icons](https://github.com/progfay/shields-with-icon)
+* [Reusable Modal](https://youtu.be/NilffTjcDVA)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
