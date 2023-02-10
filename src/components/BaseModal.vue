@@ -20,7 +20,7 @@ defineProps ({
         default : false,
     },
 });
-
+//https://www.youtube.com/watch?v=NilffTjcDVA&list=PL4cUxeGkcC9hfoy8vFQ5tbXO3vY0xhhUZ&index=4&t=300s
 </script>
 <style scoped> 
 .modal-outer-enter-active,
